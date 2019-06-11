@@ -30,7 +30,7 @@ let appData = {
             ) {
                 appData.expenses[a] = b;
             } else {
-                i = i - 1;
+                i--;
             }
         }
     },
@@ -65,13 +65,27 @@ let appData = {
         }
     },
     chooseIncome: function() {
+
         let items = prompt("enter the gender of additional income", "");
-        appData.income = split.items(", ");
-        appData.income.push(prompt("Is it all?", ""));
-        appData.income.sort();
+        if (
+            typeof(items) != "string" ||
+            typeof(items) == null ||
+            items == "") {
+            alert("You entered incorrect data!");
+        } else {
+            appData.income = items.split(", ");
+            appData.income.push(prompt("Is it all?", ""));
+            appData.income.sort();
+        }
+        this.income.forEach(function(itemList, i) {
+            alert("Ways to earn extra money" + (i++) + ") " + itemList);
+
+        })
     }
 };
-
+for (let key in appData) {
+    alert("Key: " + key + " Item: " + appData[key]);
+}
 
 /*let i = 0;
 while(i<2){
@@ -99,16 +113,3 @@ do {
 }
 while (i < 2);
 */
-
-appData.moneyPerDay = (appData.budget / 30).toFixed(2);
-alert("Budget for 1 day is " + appData.moneyPerDay + "uan");
-
-if (appData.moneyPerDay < 100) {
-    console.log("This is the minimum income level!");
-} else if (appData.moneyPerDay > 100 && appData.moneyPerDay < 2000) {
-    console.log("This is the average income level!");
-} else if (appData.moneyPerDay > 2000) {
-    console.log("This is a high income!");
-} else {
-    console.log("Error");
-}
